@@ -4,20 +4,38 @@ using UnityEngine;
 
 public class Stoner : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Damager damager;
+
+    private Damageable target;
+
     void Start()
     {
-        Debug.Log("Hello");
+        damager = gameObject.GetComponent<Damager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (target != null)
+        {
+            damager.Hit(target);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.name);
+        Damageable enemy = other.GetComponent<Damageable>();
+        if (enemy != null)
+        {
+            target = enemy;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        Damageable enemy = other.GetComponent<Damageable>();
+        if (enemy != null)
+        {
+            target = null;
+        }
     }
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PathGizmos : MonoBehaviour
 {
-    void OnStart() {
+    void OnStart()
+    {
     }
 
     void OnDrawGizmos()
