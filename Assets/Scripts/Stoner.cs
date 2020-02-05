@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class Stoner : MonoBehaviour
 {
-    public Damager damager;
+    public float shotBackoff = 2f;
+    public GameObject projectilePrefab;
 
+    private float lastShotTimestamp;
     private Damageable target;
-
-    void Start()
-    {
-        damager = gameObject.GetComponent<Damager>();
-    }
 
     void FixedUpdate()
     {
-        if (target != null)
-        {
-            damager.Hit(target);
+        if (target != null && Time.time - lastShotTimestamp > shotBackoff)
+        {    
+            lastShotTimestamp = Time.time;
+            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            projectile.GetComponent<Projectile>().target = target;
         }
     }
 

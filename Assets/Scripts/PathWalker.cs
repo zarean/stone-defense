@@ -15,10 +15,14 @@ public class PathWalker : MonoBehaviour
 	    pathNodes = path.GetComponentsInChildren<Transform>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        progress += speed * 0.01f * Time.deltaTime;
+        progress += speed * 0.01f * Time.fixedDeltaTime;
         iTween.PutOnPath(gameObject, pathNodes, progress);
+        if (progress >= 1)
+        {
+            Debug.Log("Enemy Reached End.");
+            Destroy(gameObject);
+        }
     }
 }
