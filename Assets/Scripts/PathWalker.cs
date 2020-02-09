@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class PathWalker : MonoBehaviour
 {
-    public float speed = 5;
+    public float speed = 1f;
     public Transform path;
     public Transform[] pathNodes;
     float progress = 0.0f;
+    float pathLength;
 
     // Start is called before the first frame update
     void Start()
     {
 	    pathNodes = path.GetComponentsInChildren<Transform>();
+        pathLength = iTween.PathLength(pathNodes);
     }
 
     void FixedUpdate()
     {
-        progress += speed * 0.01f * Time.fixedDeltaTime;
+        progress += Time.fixedDeltaTime * speed / pathLength;
         iTween.PutOnPath(gameObject, pathNodes, progress);
         if (progress >= 1)
         {

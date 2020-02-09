@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 {
     public Damageable target;
 
-    private float speed = 2f;
+    private float speed = 10f;
     private Damager damager;
 
     void Start()
@@ -26,6 +26,11 @@ public class Projectile : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(target == null)
+        {
+            Destroy(gameObject);
+        }
         gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, target.gameObject.transform.position, speed * Time.fixedDeltaTime);
+        gameObject.transform.Rotate(0, 0, 360f * Time.fixedDeltaTime, Space.Self);
     }
 }
