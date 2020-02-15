@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PathWalker : MonoBehaviour
 {
-    public float speed = 1f;
+    public float speed;
     public Transform path;
-    public Transform[] pathNodes;
+    private Transform[] pathNodes;
     float progress = 0.0f;
     float pathLength;
 

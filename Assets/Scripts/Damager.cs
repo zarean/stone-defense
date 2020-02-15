@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Damager : MonoBehaviour
 {
-    public int damage = 30;
+    public int damage;
 
     public void Hit(Damageable target)
     {

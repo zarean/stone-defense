@@ -15,7 +15,7 @@ public class Controller : MonoBehaviour
     {
         if( i < prefabs.Length ) {
             time += Time.deltaTime;
-            if (time > 0.2) {
+            if (time > 5) {
                 time = 0;
                 GameObject enemy = Instantiate(prefabs[i], transform.position, Quaternion.identity);
                 enemy.GetComponent<PathWalker>().path = path;

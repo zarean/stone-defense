@@ -5,8 +5,8 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Damageable target;
+    public float speed;
 
-    private float speed = 10f;
     private Damager damager;
 
     void Start()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public int maxHealth;
     public Transform healthBar;
 
     private int currentHealth;
