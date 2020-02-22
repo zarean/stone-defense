@@ -6,19 +6,28 @@ namespace StoneDefense
 {
     public class Stoner : MonoBehaviour
     {
-        public float shotBackoff = 2f;
+        public float shotBackoff;
         public GameObject projectilePrefab;
+        public Transform throwingPoint;
+        public float projectileSecondsInAir;
 
         private float lastShotTimestamp;
-        private Damageable target;
+        private List<Damageable> targets = new List<Damageable>{};
+        void Start()
+        {
+            lastShotTimestamp = -1 * shotBackoff;
+        }
 
         void FixedUpdate()
         {
-            if (target != null && Time.time - lastShotTimestamp > shotBackoff)
+            if (targets.Count != 0 && Time.time - lastShotTimestamp > shotBackoff)
             {    
                 lastShotTimestamp = Time.time;
                 GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-                projectile.GetComponent<Projectile>().target = target;
+                projectile.GetComponent<Projectile>().secondsInAir = projectileSecondsInAir;
+                projectile.GetComponent<Projectile>().target = targets[0];
+                projectile.GetComponent<Projectile>().source = throwingPoint.position;
+                projectile.GetComponent<Projectile>().destination = targets[0].GetComponent<PathWalker>().GetFuturePosition(projectileSecondsInAir);
             }
         }
 
@@ -27,7 +36,7 @@ namespace StoneDefense
             Damageable enemy = other.GetComponent<Damageable>();
             if (enemy != null)
             {
-                target = enemy;
+                targets.Add(enemy);
             }
         }
 
@@ -36,7 +45,7 @@ namespace StoneDefense
             Damageable enemy = other.GetComponent<Damageable>();
             if (enemy != null)
             {
-                target = null;
+                targets.Remove(enemy);
             }
         }
     }

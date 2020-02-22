@@ -27,4 +27,8 @@ public class PathWalker : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public Vector3 GetFuturePosition(float seconds) {
+        return iTween.PointOnPath(pathNodes, progress + seconds * speed / pathLength);
+    }
 }
