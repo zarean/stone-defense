@@ -2,30 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Damageable : MonoBehaviour
+namespace StoneDefense
 {
-    public int maxHealth;
-    public Transform healthBar;
-
-    private int currentHealth;
-
-    public void Start()
+    public class Damageable : MonoBehaviour
     {
-        currentHealth = maxHealth;
-    }
+        public int maxHealth;
+        public Transform healthBar;
 
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth < 1)
+        private int currentHealth;
+
+        public void Start()
         {
-            Die();
+            currentHealth = maxHealth;
         }
-        healthBar.localScale = new Vector3(currentHealth / (float)maxHealth, 1, 1);
-    }
 
-    void Die()
-    {
-        Destroy(gameObject);
+        public void TakeDamage(int damage)
+        {
+            currentHealth -= damage;
+            if (currentHealth < 1)
+            {
+                Die();
+            }
+            healthBar.localScale = new Vector3(currentHealth / (float)maxHealth, 1, 1);
+        }
+
+        void Die()
+        {
+            Destroy(gameObject);
+        }
     }
 }

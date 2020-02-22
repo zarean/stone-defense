@@ -2,39 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stoner : MonoBehaviour
+namespace StoneDefense
 {
-    public float shotBackoff = 2f;
-    public GameObject projectilePrefab;
-
-    private float lastShotTimestamp;
-    private Damageable target;
-
-    void FixedUpdate()
+    public class Stoner : MonoBehaviour
     {
-        if (target != null && Time.time - lastShotTimestamp > shotBackoff)
-        {    
-            lastShotTimestamp = Time.time;
-            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-            projectile.GetComponent<Projectile>().target = target;
-        }
-    }
+        public float shotBackoff = 2f;
+        public GameObject projectilePrefab;
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Damageable enemy = other.GetComponent<Damageable>();
-        if (enemy != null)
+        private float lastShotTimestamp;
+        private Damageable target;
+
+        void FixedUpdate()
         {
-            target = enemy;
+            if (target != null && Time.time - lastShotTimestamp > shotBackoff)
+            {    
+                lastShotTimestamp = Time.time;
+                GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+                projectile.GetComponent<Projectile>().target = target;
+            }
         }
-    }
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        Damageable enemy = other.GetComponent<Damageable>();
-        if (enemy != null)
+        void OnTriggerEnter2D(Collider2D other)
         {
-            target = null;
+            Damageable enemy = other.GetComponent<Damageable>();
+            if (enemy != null)
+            {
+                target = enemy;
+            }
+        }
+
+        void OnTriggerExit2D(Collider2D other)
+        {
+            Damageable enemy = other.GetComponent<Damageable>();
+            if (enemy != null)
+            {
+                target = null;
+            }
         }
     }
-}
+    }

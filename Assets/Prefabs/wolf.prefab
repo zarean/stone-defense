@@ -156,7 +156,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   path: {fileID: 0}
-  pathNodes: []
 --- !u!114 &472832627479629363
 MonoBehaviour:
   m_ObjectHideFlags: 0

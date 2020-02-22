@@ -2,35 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+namespace StoneDefense
 {
-    public Damageable target;
-    public float speed;
-
-    private Damager damager;
-
-    void Start()
+    public class Projectile : MonoBehaviour
     {
-        damager = GetComponent<Damager>();
-    }
+        public Damageable target;
+        public float speed;
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Damageable damagable = other.GetComponent<Damageable>();
-        if (damagable == target) 
+        private Damager damager;
+
+        void Start()
         {
-            damager.Hit(target);
-            Destroy(gameObject);
+            damager = GetComponent<Damager>();
         }
-    }
 
-    void FixedUpdate()
-    {
-        if(target == null)
+        void OnTriggerEnter2D(Collider2D other)
         {
-            Destroy(gameObject);
+            Damageable damagable = other.GetComponent<Damageable>();
+            if (damagable == target) 
+            {
+                damager.Hit(target);
+                Destroy(gameObject);
+            }
         }
-        gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, target.gameObject.transform.position, speed * Time.fixedDeltaTime);
-        gameObject.transform.Rotate(0, 0, 360f * Time.fixedDeltaTime, Space.Self);
+
+        void FixedUpdate()
+        {
+            if(target == null)
+            {
+                Destroy(gameObject);
+            }
+            gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, target.gameObject.transform.position, speed * Time.fixedDeltaTime);
+            gameObject.transform.Rotate(0, 0, 360f * Time.fixedDeltaTime, Space.Self);
+        }
     }
 }

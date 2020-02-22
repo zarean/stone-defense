@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Damager : MonoBehaviour
+namespace StoneDefense
 {
-    public int damage;
-
-    public void Hit(Damageable target)
+    public class Damager : MonoBehaviour
     {
-        target.TakeDamage(damage);
+        public int damage;
+
+        public void Hit(Damageable target)
+        {
+            target.TakeDamage(damage);
+        }
     }
 }
