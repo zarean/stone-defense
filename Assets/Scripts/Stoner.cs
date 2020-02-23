@@ -23,7 +23,7 @@ namespace StoneDefense
             if (targets.Count != 0 && Time.time - lastShotTimestamp > shotBackoff)
             {    
                 lastShotTimestamp = Time.time;
-                GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+                GameObject projectile = Instantiate(projectilePrefab, throwingPoint.position, Quaternion.identity);
                 projectile.GetComponent<Projectile>().secondsInAir = projectileSecondsInAir;
                 projectile.GetComponent<Projectile>().target = targets[0];
                 projectile.GetComponent<Projectile>().source = throwingPoint.position;
